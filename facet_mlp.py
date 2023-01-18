@@ -67,7 +67,7 @@ def facet_mlp(x, y, fold, best_architecture, best_batch_size, best_seed):
                                         shuffle=True, 
                                         random_state=best_seed, 
                                         early_stopping=True, 
-                                        validation_fraction=35)       
+                                        validation_fraction=0.35)       
     model.fit(x_train, y_train.ravel())
     
     # testing data
