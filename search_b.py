@@ -50,7 +50,6 @@ def evaluate_batch_size(x, y, fold, architecture, batch_size, rand):
             
     # evaluate
     predictions = model.predict(x_train)
-    predictions = np.clip(predictions, 0, 1)
     score = metrics.r2_score(y_train, predictions)
     
     return score
