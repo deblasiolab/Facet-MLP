@@ -7,7 +7,7 @@ import numpy as np
 class advise_estimator:
 
     def __init__(self, experiment_name, fold, delta):
-        project_path = f"/mnt/disk023/lcedillo/Facet-MLP/{experiment_name}"
+        project_path = f"/mnt/disk023/lcedillo/Lead_Data/{experiment_name}"
         os.makedirs(f"{project_path}/sets/delta_{delta}/", exist_ok=True)
 
         self.paths = {}
@@ -20,9 +20,9 @@ class advise_estimator:
         self.testing_results = self.run_advisor("test", fold)
 
     def learn_greedy_sets(self, fold, delta): 
-        benchmark_fname = f"/mnt/disk023/lcedillo/Facet-MLP/1028_paramadvisor_data_transfer/train_VTML200.45.11.42.40-12-{fold}"
-        parameter_fname = "/mnt/disk023/lcedillo/Facet-MLP/Data/parameters_no_struct.txt"
-        accuracies_fname = "/mnt/disk023/lcedillo/Facet-MLP/Data/accuracy_combined.tsv"
+        benchmark_fname = f"/mnt/disk023/lcedillo/Lead_Data/1028_paramadvisor_data_transfer/train_VTML200.45.11.42.40-12-{fold}"
+        parameter_fname = "/mnt/disk023/lcedillo/Lead_Data/parameters_no_struct.txt"
+        accuracies_fname = "/mnt/disk023/lcedillo/Lead_Data/accuracy_combined.tsv"
         k = 25   
         AVERAGE_MAX = True
 
@@ -193,7 +193,7 @@ class advise_estimator:
                 parameters_file.write(parameters[parameterSet[i]]+"\n")
 
     def run_advisor(self, split, fold): 
-        benchmarks_fname = f"/mnt/disk023/lcedillo/Facet-MLP/1028_paramadvisor_data_transfer/{split}_VTML200.45.11.42.40-12-{fold}"
+        benchmarks_fname = f"/mnt/disk023/lcedillo/Lead_Data/1028_paramadvisor_data_transfer/{split}_VTML200.45.11.42.40-12-{fold}"
         accuracies_fname = "/mnt/disk001/dfdeblasio/Greedy_Algo/accuracy_combined.q.pickle"
         accuracy_ftype = "pickle"
         estimator_ftype = "tsv"
@@ -207,7 +207,7 @@ class advise_estimator:
             print("Accuracy file type not Pickle or TSV.")
             exit(20)
 
-        # Read the estimator file, should be a TSV with 2 columns: alignment name, Facet score
+        # Read the estimator file, should be a TSV with 2 columns: alignment name, estimator score
         estimator = {}
         if(estimator_ftype == "tsv"):
             est_f = open(self.paths["estimator"])

@@ -4,7 +4,7 @@ from sklearn import metrics, linear_model, ensemble, tree
 
 from project_functions import fun
 
-def facet_regression(x, y, fold, model):
+def lead_regression(x, y, fold, model):
 
     # training data
     training_data = fun().split_benchmarks("train", fold)
@@ -24,10 +24,9 @@ def facet_regression(x, y, fold, model):
     x_test = x[testing_data["indices"]]
     y_test = y[testing_data["indices"]]
             
-    # evaluate
-    predictions = models[model].predict(x_test)    
-    print("train r2", metrics.r2_score(y_train, model.predict(x_train)))
-    print("test r2", metrics.r2_score(y_test, predictions))
+    # evaluate  
+    print("train r2", metrics.r2_score(y_train, models[model].predict(x_train)))
+    print("test r2", metrics.r2_score(y_test, models[model].predict(x_test)))
     
     # run advisor
     estimator = models[model].predict(x)
@@ -44,9 +43,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     # load data
-    x = np.load("/mnt/disk023/lcedillo/Facet-MLP/Data/facet_features.npy", allow_pickle=True)
-    y = np.load("/mnt/disk023/lcedillo/Facet-MLP/Data/alignments_accuracy.npy", allow_pickle=True)
+    x = np.load("/mnt/disk023/lcedillo/Lead_Data/facet_features.npy", allow_pickle=True)
+    y = np.load("/mnt/disk023/lcedillo/Lead_Data/alignments_accuracy.npy", allow_pickle=True)
     
-    facet_regression(x, y, args.fold, args.model)
+    lead_regression(x, y, args.fold, args.model)
     
     
